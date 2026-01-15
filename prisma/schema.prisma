@@ -5,11 +5,111 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  idUsuario     Int      @id
+  nome          String
+  email         String   @unique
+  senha         String
+  data_cadastro DateTime
+
+  contas      Conta[]
+  cartoes     CartaoCredito[]
+  lancamentos Lancamento[]
+}
+
+model Grupo {
+  idGrupo   Int    @id
+  nome      String
+  descricao String
+
+  contas      Conta[]
+  lancamentos Lancamento[]
+}
+
+model Conta {
+  idConta      Int
+  idUsuario    Int
+  idGrupo      Int?
+  tipo         String
+  saldoInicial Float
+  dataCriacao  DateTime
+
+  usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  grupo   Grupo?  @relation(fields: [idGrupo], references: [idGrupo])
+
+  lancamentos Lancamento[]
+
+  @@id([idConta, idUsuario])
+}
+
+model CartaoCredito {
+  idCartao    Int
+  idUsuario   Int
+  nome        String
+  limite      Float
+  bandeira    String
+  validadeMes Int
+  validadeAno Int
+
+  usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  faturas Fatura[]
+
+  @@id([idCartao, idUsuario])
+}
+
+model Fatura {
+  idFatura        Int      @id
+  idCartao        Int
+  idUsuario       Int
+  mesReferencia   Int
+  anoReferencia   Int
+  dataFechamento  DateTime
+  dataVencimento  DateTime
+  valorTotal      Float
+  statusPagamento String
+  cartao CartaoCredito @relation(  fields: [idCartao, idUsuario],  references: [idCartao, idUsuario])
+
+  lancamentos Lancamento[]
+}
+
+model Lancamento {
+  idLancamento   Int      @id
+  idConta        Int
+  idUsuario      Int
+  idGrupo        Int
+  idFatura       Int
+  valor          Float
+  tipo           String
+  descricao      String?
+  dataLancamento DateTime
+
+  usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
+  grupo   Grupo   @relation(fields: [idGrupo], references: [idGrupo])
+  fatura  Fatura  @relation(fields: [idFatura], references: [idFatura])
+  conta Conta @relation(  fields: [idConta, idUsuario],  references: [idConta, idUsuario])
+
+  transferenciasOrigem  Transferencia[] @relation("Origem")
+  transferenciasDestino Transferencia[] @relation("Destino")
+}
+
+model Transferencia {
+  idTransferencia     Int      @id
+  idContaOrigem       Int
+  idContaDestino      Int
+  valor               Float
+  dataTransferencia   DateTime
+  idLancamentoOrigem  Int
+  idLancamentoDestino Int
+
+  lancamentoOrigem Lancamento @relation(  "Origem",  fields: [idLancamentoOrigem],  references: [idLancamento])
+
+  lancamentoDestino Lancamento @relation(  "Destino",  fields: [idLancamentoDestino],  references: [idLancamento])
 }
