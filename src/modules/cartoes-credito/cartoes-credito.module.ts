@@ -1,10 +1,9 @@
-
 import { Module } from '@nestjs/common';
-import { CartoesService } from './cartoes-credito.service';
-import { CartoesController } from './cartoes-credito.controller';
+import { CartoesCreditoService } from './cartoes-credito.service';
+import { CartoesCreditoController } from './cartoes-credito.controller';
 
 @Module({
-  controllers: [CartoesController],
-  providers: [CartoesService],
+  controllers: [CartoesCreditoController],
+  providers: [CartoesCreditoService],
 })
 export class CartoesModule {}
