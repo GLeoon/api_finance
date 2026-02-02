@@ -8,9 +8,22 @@ export class CartoesCreditoService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(dto: CreateCartaoDto) {
+    const now = new Date();
+    const validadeDate = new Date(
+      now.getFullYear() + 5,
+      now.getMonth(),
+      now.getDate(),
+    );
+    const validadeMes = validadeDate.getMonth() + 1;
+    const validadeAno = validadeDate.getFullYear();
+
     return this.prisma.cartaoCredito.create({
       data: {
         ...dto,
+        bandeira: 'MasterCard',
+        validadeMes,
+        validadeAno,
+        limite: 10000.0,
       } as any,
     });
   }
@@ -24,6 +37,7 @@ export class CartoesCreditoService {
   async findOne(id: number) {
     const cartao = await this.prisma.cartaoCredito.findFirst({
       where: { idCartao: id },
+      include: { usuario: true },
     });
 
     if (!cartao) throw new NotFoundException('Cartão não encontrado');
@@ -31,6 +45,7 @@ export class CartoesCreditoService {
   }
 
   update(id: number, idUsuario: number, dto: UpdateCartaoDto) {
+    console.log('Updating card with id:', id, 'for user:', idUsuario);
     return this.prisma.cartaoCredito.update({
       where: { idCartao_idUsuario: { idCartao: id, idUsuario } },
       data: { ...dto },

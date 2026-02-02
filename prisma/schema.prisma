@@ -53,7 +53,6 @@ model Conta {
 model CartaoCredito {
   idCartao    Int       @default(autoincrement())
   idUsuario   Int
-  nome        String
   limite      Float
   bandeira    String
   validadeMes Int

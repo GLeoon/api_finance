@@ -14,11 +14,6 @@ export class CreateCartaoDto {
   idUsuario: number;
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  nome: string;
-
-  @ApiProperty()
   @IsNumber()
   limite: number;
 
