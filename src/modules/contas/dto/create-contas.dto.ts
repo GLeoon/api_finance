@@ -24,8 +24,4 @@ export class CreateContaDto {
   @ApiProperty({ example: 1000 })
   @IsNumber()
   saldoInicial: number;
-
-  @ApiProperty()
-  @IsDateString()
-  dataCriacao: Date;
 }

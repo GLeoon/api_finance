@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Usuario" ALTER COLUMN "data_cadastro" SET DEFAULT CURRENT_TIMESTAMP;

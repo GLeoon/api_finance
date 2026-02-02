@@ -18,7 +18,7 @@ model Usuario {
   nome          String
   email         String   @unique
   senha         String
-  data_cadastro DateTime
+  data_cadastro DateTime @default(now())
 
   contas      Conta[]
   cartoes     CartaoCredito[]
@@ -35,12 +35,12 @@ model Grupo {
 }
 
 model Conta {
-  idConta      Int
+  idConta      Int      @default(autoincrement())
   idUsuario    Int
   idGrupo      Int?
   tipo         String
   saldoInicial Float
-  dataCriacao  DateTime
+  dataCriacao  DateTime @default(now())
 
   usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
   grupo   Grupo?  @relation(fields: [idGrupo], references: [idGrupo])
@@ -51,7 +51,7 @@ model Conta {
 }
 
 model CartaoCredito {
-  idCartao    Int
+  idCartao    Int       @default(autoincrement())
   idUsuario   Int
   nome        String
   limite      Float
