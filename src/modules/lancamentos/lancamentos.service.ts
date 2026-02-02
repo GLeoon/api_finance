@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateLancamentoDto } from './dto/create-lancamentos.dto';
 import { UpdateLancamentoDto } from './dto/update-lancamentos.dto';
@@ -7,8 +11,37 @@ import { UpdateLancamentoDto } from './dto/update-lancamentos.dto';
 export class LancamentosService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(dto: CreateLancamentoDto) {
-    return this.prisma.lancamento.create({ data: dto as any });
+  async create(dto: CreateLancamentoDto) {
+    const fatura = await this.prisma.fatura.findUnique({
+      where: { idFatura: dto.idFatura },
+      include: {
+        cartao: true,
+      },
+    });
+
+    if (!fatura) {
+      throw new NotFoundException('Fatura não encontrada');
+    }
+
+    const novoValorTotal = fatura.valorTotal + Math.abs(dto.valor);
+    if (novoValorTotal > fatura.cartao.limite) {
+      throw new BadRequestException(
+        `Limite de crédito excedido! Limite: R$ ${fatura.cartao.limite}, Novo total: R$ ${novoValorTotal}`,
+      );
+    }
+
+    const lancamento = await this.prisma.lancamento.create({
+      data: dto as any,
+    });
+
+    await this.prisma.fatura.update({
+      where: { idFatura: dto.idFatura },
+      data: {
+        valorTotal: novoValorTotal,
+      },
+    });
+
+    return lancamento;
   }
 
   findAll() {
