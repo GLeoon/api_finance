@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Usuario {
-  idUsuario     Int      @id
+  idUsuario     Int      @id @default(autoincrement())
   nome          String
   email         String   @unique
   senha         String
@@ -26,7 +26,7 @@ model Usuario {
 }
 
 model Grupo {
-  idGrupo   Int    @id
+  idGrupo   Int    @id @default(autoincrement())
   nome      String
   descricao String
 
@@ -66,7 +66,7 @@ model CartaoCredito {
 }
 
 model Fatura {
-  idFatura        Int      @id
+  idFatura        Int      @id @default(autoincrement())
   idCartao        Int
   idUsuario       Int
   mesReferencia   Int
@@ -81,7 +81,7 @@ model Fatura {
 }
 
 model Lancamento {
-  idLancamento   Int      @id
+  idLancamento   Int      @id @default(autoincrement())
   idConta        Int
   idUsuario      Int
   idGrupo        Int
@@ -101,7 +101,7 @@ model Lancamento {
 }
 
 model Transferencia {
-  idTransferencia     Int      @id
+  idTransferencia     Int      @id @default(autoincrement())
   idContaOrigem       Int
   idContaDestino      Int
   valor               Float
