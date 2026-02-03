@@ -1,0 +1,851 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Finance
+meta:
+  id: wrk_9c44e7c30b6847aa84a968f029d56d7d
+  created: 1769020367582
+  modified: 1769020367582
+  description: ""
+collection:
+  - name: Usuarios
+    meta:
+      id: fld_5839c12b28e34afebfeb69f2e58e435f
+      created: 1769020582384
+      modified: 1769020582384
+      sortKey: -1769020582384
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/usuarios"
+        name: Listar
+        meta:
+          id: req_bc6876a332bf44b2817d500c96aa96c5
+          created: 1769020582409
+          modified: 1770059523133
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582409
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/usuarios/2"
+        name: Buscar por ID
+        meta:
+          id: req_393c4f3dfa7c44c08a0ed6e03ac0d23b
+          created: 1769020582417
+          modified: 1770059528917
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582417
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/usuarios"
+        name: Criar
+        meta:
+          id: req_3ccedf0cfaf043718705a8c881557c58
+          created: 1769020582424
+          modified: 1770075980446
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582424
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Brenda",
+            	"email": "brenda@1234.com",
+            	"senha": "123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/usuarios/1"
+        name: Atualizar
+        meta:
+          id: req_159a0f9e4cd04f0e882fea8ead514d5f
+          created: 1769020582428
+          modified: 1770059562122
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582428
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"senha": "12345"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/usuarios/4"
+        name: Remover
+        meta:
+          id: req_15be84a49c294692aba2ccda55cad0fc
+          created: 1769020582431
+          modified: 1770059595634
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582431
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Grupos
+    meta:
+      id: fld_0dca29935c314965aa765a610b2a5170
+      created: 1769020582434
+      modified: 1769020582434
+      sortKey: -1769020582434
+      description: ""
+    children:
+      - url: "{{ _.base_url }}/grupos"
+        name: Listar
+        meta:
+          id: req_ce9b5eb28392495c8ef827b10c54bcf0
+          created: 1769020582436
+          modified: 1770058948859
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582436
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/grupos/1"
+        name: Buscar por ID
+        meta:
+          id: req_99e7231cdb6247db9219269ef4cec900
+          created: 1769020582440
+          modified: 1769020582440
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582440
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/grupos"
+        name: Criar
+        meta:
+          id: req_ad01ddda092d4af2ae4bb416f3b855eb
+          created: 1769020582446
+          modified: 1770075961250
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582446
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "platinum",
+            	"descricao": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/grupos/1"
+        name: Atualizar
+        meta:
+          id: req_c4e85f295c39461bb0fa036a827d2186
+          created: 1769020582450
+          modified: 1770058982229
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582450
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"descricao": "grupo alto"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.base_url }}/grupos/3"
+        name: Remover
+        meta:
+          id: req_aa90d1e798384145916c7250b93e02fe
+          created: 1769020582456
+          modified: 1770059001708
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582456
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Contas
+    meta:
+      id: fld_4646088648f44a5f97a1da30cd653fe3
+      created: 1769020582461
+      modified: 1769020582461
+      sortKey: -1769020582461
+      description: ""
+    children:
+      - url: "{{ base_url }}/contas"
+        name: Listar
+        meta:
+          id: req_ac77ea4dbd674b6ab739e314dc527817
+          created: 1769020582464
+          modified: 1769020582464
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582464
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/contas/7"
+        name: Buscar por ID
+        meta:
+          id: req_f5c8585b33404e5983af56730153d89e
+          created: 1769020582473
+          modified: 1770062276991
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582473
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/contas"
+        name: Criar
+        meta:
+          id: req_c50c8b48530844f0b9f17b2dc1c1ca8e
+          created: 1769020582478
+          modified: 1770076030845
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582478
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": 2,
+            	"idGrupo": 2,
+            	"tipo": "Corrente",
+            	"saldo": 0
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/contas/1"
+        name: Atualizar
+        meta:
+          id: req_cc88f486633348cdbbcd77a5668c5c10
+          created: 1769020582482
+          modified: 1770074385244
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582482
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": 1,
+            	"saldo": 600.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/contas/8/3"
+        name: Remover
+        meta:
+          id: req_27106a7c601c4087880dde6201723136
+          created: 1769020582486
+          modified: 1770062363338
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582486
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: CartoesCredito
+    meta:
+      id: fld_7135cb5ec8ab4646b9aafad5ae4298c1
+      created: 1769020582492
+      modified: 1769020582492
+      sortKey: -1769020582492
+      description: ""
+    children:
+      - url: "{{ base_url }}/cartoes-credito"
+        name: Listar
+        meta:
+          id: req_d29bde38f47e4dd2a8318422438030ea
+          created: 1769020582494
+          modified: 1769020582494
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582494
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/cartoes-credito/2"
+        name: Buscar por ID
+        meta:
+          id: req_433f2df3f99d4cab96e595ac9cf0f739
+          created: 1769020582497
+          modified: 1770072604023
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582497
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/cartoes-credito"
+        name: Criar
+        meta:
+          id: req_d147cc3ed9f946cbacd209ae46bdfc05
+          created: 1769020582501
+          modified: 1770076072730
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582501
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": 2
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/cartoes-credito/2"
+        name: Atualizar
+        meta:
+          id: req_5b40fe1c9dd24936896a01632df039e9
+          created: 1769020582503
+          modified: 1770072799175
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582503
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": 1,
+            	"validadeMes": 3
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/cartoes-credito/3"
+        name: Remover
+        meta:
+          id: req_0690cbcf805445c18939d123a96a43dd
+          created: 1769020582510
+          modified: 1770072858680
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582510
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"idUsuario": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Faturas
+    meta:
+      id: fld_1e390e9c939b4815ac7652017c259de9
+      created: 1769020582518
+      modified: 1770076156408
+      sortKey: -1769020582518
+      description: ""
+    children:
+      - url: "{{ base_url }}/faturas"
+        name: Listar
+        meta:
+          id: req_779ba8f5dee34e15a680cd16289eda53
+          created: 1769020582522
+          modified: 1769020582522
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582522
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/faturas/1"
+        name: Buscar por ID
+        meta:
+          id: req_32a961990be94c1cb102487681363626
+          created: 1769020582529
+          modified: 1769020582529
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582529
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/faturas"
+        name: Criar
+        meta:
+          id: req_4307fd63ec6a4752a2a1ea042ede6836
+          created: 1769020582532
+          modified: 1770076130725
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582532
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idCartao": 2,
+              "idUsuario": 2,
+              "mesReferencia": 2,
+              "anoReferencia": 2026,
+              "dataFechamento": "2026-02-25T00:00:00.000Z",
+              "dataVencimento": "2026-03-10T00:00:00.000Z",
+              "valorTotal": 0,
+              "statusPagamento": "ABERTA"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/faturas/1"
+        name: Atualizar
+        meta:
+          id: req_5f964463f8844f5789667bfdf943c6cc
+          created: 1769020582535
+          modified: 1770073142312
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582535
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"statusPagamento": "FECHADA"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/faturas/1"
+        name: Remover
+        meta:
+          id: req_4b72999d083342cd9c7f29b1e3121028
+          created: 1769020582544
+          modified: 1769020582544
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582544
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Lancamentos
+    meta:
+      id: fld_c8a9326206334488aab6ee0078063450
+      created: 1769020582550
+      modified: 1769020582550
+      sortKey: -1769020582550
+      description: ""
+    children:
+      - url: "{{ base_url }}/lancamentos"
+        name: Listar
+        meta:
+          id: req_3d3dd093030e4bc5945ae43d7e998d08
+          created: 1769020582552
+          modified: 1769020582552
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582552
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/lancamentos/1"
+        name: Buscar por ID
+        meta:
+          id: req_5ba1bb724de446c8ab9d657cf6799a3c
+          created: 1769020582554
+          modified: 1769020582554
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582554
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/lancamentos"
+        name: Criar
+        meta:
+          id: req_9b981b5e2cf04dd8b0dc8bb532489e7f
+          created: 1769020582558
+          modified: 1770076479707
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582558
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idConta": 2,
+              "idUsuario": 2,
+              "idGrupo": 2,
+              "idFatura": 2,
+              "valor": 1000,
+              "tipo": "COMPRA",
+              "descricao": "deposito",
+            	"alvo": "CONTA"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/lancamentos/1"
+        name: Atualizar
+        meta:
+          id: req_47f7a8f8b232446cac7b6f800891ff01
+          created: 1769020582560
+          modified: 1769020582560
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582560
+        method: PATCH
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/lancamentos/2"
+        name: Remover
+        meta:
+          id: req_a3c0ff0d543947fa9ac6b2b86c704167
+          created: 1769020582564
+          modified: 1770073654861
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582564
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Transferencias
+    meta:
+      id: fld_37ece696637d4f56b5a9fae2d9427977
+      created: 1769020582567
+      modified: 1769020582567
+      sortKey: -1769020582567
+      description: ""
+    children:
+      - url: "{{ base_url }}/transferencias"
+        name: Listar
+        meta:
+          id: req_8586f5f67f79422787fb02090fd06399
+          created: 1769020582568
+          modified: 1769020582568
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582568
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/transferencias/1"
+        name: Buscar por ID
+        meta:
+          id: req_42c51040d4ff4d529c2f3c3e2c463959
+          created: 1769020582572
+          modified: 1769020582572
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582572
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/transferencias"
+        name: Criar
+        meta:
+          id: req_0336380efcbd4d2faa7a9b134a1d8a95
+          created: 1769020582575
+          modified: 1770076733662
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582575
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idContaOrigem": 2,
+              "idContaDestino": 1,
+              "valor": 500.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/transferencias/1"
+        name: Atualizar
+        meta:
+          id: req_edc66143c5a145f29f029ca905d47fe5
+          created: 1769020582578
+          modified: 1769020582578
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582579
+        method: PATCH
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/transferencias/1"
+        name: Remover
+        meta:
+          id: req_6a2f08c43ef24bc182c599e7d39e65ff
+          created: 1769020582585
+          modified: 1769020582585
+          isPrivate: false
+          description: ""
+          sortKey: -1769020582585
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_10153b824b0f6f3f7457c852698547b146b02812
+    created: 1769020367634
+    modified: 1769020367634
+environments:
+  name: Base Environment
+  meta:
+    id: env_10153b824b0f6f3f7457c852698547b146b02812
+    created: 1769020367628
+    modified: 1770058167762
+    isPrivate: false
+  data:
+    base_url: localhost:3000
