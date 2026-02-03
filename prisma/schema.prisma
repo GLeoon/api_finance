@@ -39,7 +39,7 @@ model Conta {
   idUsuario    Int
   idGrupo      Int?
   tipo         String
-  saldoInicial Float
+  saldo        Float
   dataCriacao  DateTime @default(now())
 
   usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
@@ -84,15 +84,16 @@ model Lancamento {
   idConta        Int
   idUsuario      Int
   idGrupo        Int
-  idFatura       Int
+  idFatura       Int?
   valor          Float
   tipo           String
   descricao      String?
-  dataLancamento DateTime
+  dataLancamento DateTime @default(now())
+  alvo           AlvoLancamento
 
   usuario Usuario @relation(fields: [idUsuario], references: [idUsuario])
   grupo   Grupo   @relation(fields: [idGrupo], references: [idGrupo])
-  fatura  Fatura  @relation(fields: [idFatura], references: [idFatura])
+  fatura  Fatura?  @relation(fields: [idFatura], references: [idFatura])
   conta Conta @relation(  fields: [idConta, idUsuario],  references: [idConta, idUsuario])
 
   transferenciasOrigem  Transferencia[] @relation("Origem")
@@ -104,11 +105,16 @@ model Transferencia {
   idContaOrigem       Int
   idContaDestino      Int
   valor               Float
-  dataTransferencia   DateTime
+  dataTransferencia   DateTime @default(now())
   idLancamentoOrigem  Int
   idLancamentoDestino Int
 
   lancamentoOrigem Lancamento @relation(  "Origem",  fields: [idLancamentoOrigem],  references: [idLancamento])
 
   lancamentoDestino Lancamento @relation(  "Destino",  fields: [idLancamentoDestino],  references: [idLancamento])
+}
+
+enum AlvoLancamento {
+  CONTA
+  FATURA
 }

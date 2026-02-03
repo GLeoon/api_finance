@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDateString,
+  IsEnum,
   IsInt,
   IsNumber,
   IsOptional,
@@ -37,7 +38,7 @@ export class CreateLancamentoDto {
   @IsString()
   descricao?: string;
 
-  @ApiProperty()
-  @IsDateString()
-  dataLancamento: Date;
+  @ApiProperty({ enum: ['CONTA', 'FATURA'] })
+  @IsEnum(['CONTA', 'FATURA'])
+  alvo: 'CONTA' | 'FATURA';
 }

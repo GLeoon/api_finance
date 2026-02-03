@@ -13,8 +13,4 @@ export class CreateTransferenciaDto {
   @ApiProperty()
   @IsNumber()
   valor: number;
-
-  @ApiProperty()
-  @IsDateString()
-  dataTransferencia: Date;
 }

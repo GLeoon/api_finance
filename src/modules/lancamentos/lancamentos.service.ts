@@ -12,36 +12,15 @@ export class LancamentosService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateLancamentoDto) {
-    const fatura = await this.prisma.fatura.findUnique({
-      where: { idFatura: dto.idFatura },
-      include: {
-        cartao: true,
-      },
-    });
-
-    if (!fatura) {
-      throw new NotFoundException('Fatura não encontrada');
+    if (dto.alvo === 'FATURA') {
+      return this.createLancamentoFatura(dto);
     }
 
-    const novoValorTotal = fatura.valorTotal + Math.abs(dto.valor);
-    if (novoValorTotal > fatura.cartao.limite) {
-      throw new BadRequestException(
-        `Limite de crédito excedido! Limite: R$ ${fatura.cartao.limite}, Novo total: R$ ${novoValorTotal}`,
-      );
+    if (dto.alvo === 'CONTA') {
+      return this.createLancamentoConta(dto);
     }
 
-    const lancamento = await this.prisma.lancamento.create({
-      data: dto as any,
-    });
-
-    await this.prisma.fatura.update({
-      where: { idFatura: dto.idFatura },
-      data: {
-        valorTotal: novoValorTotal,
-      },
-    });
-
-    return lancamento;
+    throw new BadRequestException('Tipo de lançamento inválido');
   }
 
   findAll() {
@@ -73,6 +52,83 @@ export class LancamentosService {
   remove(id: number) {
     return this.prisma.lancamento.delete({
       where: { idLancamento: id },
+    });
+  }
+
+  async createLancamentoFatura(dto: CreateLancamentoDto) {
+    const fatura = await this.prisma.fatura.findUnique({
+      where: { idFatura: dto.idFatura },
+      include: {
+        cartao: true,
+      },
+    });
+
+    if (!fatura) {
+      throw new NotFoundException('Fatura não encontrada');
+    }
+
+    const novoValorTotal = fatura.valorTotal + Math.abs(dto.valor);
+    if (novoValorTotal > fatura.cartao.limite) {
+      throw new BadRequestException(
+        `Limite de crédito excedido! Limite: R$ ${fatura.cartao.limite}, Novo total: R$ ${novoValorTotal}`,
+      );
+    }
+
+    const lancamento = await this.prisma.lancamento.create({
+      data: {
+        ...dto,
+      },
+    });
+
+    await this.prisma.fatura.update({
+      where: { idFatura: dto.idFatura },
+      data: {
+        valorTotal: novoValorTotal,
+      },
+    });
+
+    return lancamento;
+  }
+
+  async createLancamentoConta(dto: CreateLancamentoDto) {
+    if (!dto.idConta) {
+      throw new BadRequestException(
+        'idConta é obrigatório para lançamento em conta',
+      );
+    }
+
+    const conta = await this.prisma.conta.findUnique({
+      where: {
+        idConta_idUsuario: { idConta: dto.idConta, idUsuario: dto.idUsuario },
+      },
+    });
+
+    if (!conta) {
+      throw new NotFoundException('Conta não encontrada');
+    }
+
+    const impacto =
+      dto.tipo === 'SAIDA' ? -Math.abs(dto.valor) : Math.abs(dto.valor);
+
+    if (conta.saldo + impacto < 0) {
+      throw new BadRequestException('Saldo insuficiente');
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      const lancamento = await tx.lancamento.create({
+        data: dto,
+      });
+
+      await tx.conta.update({
+        where: {
+          idConta_idUsuario: { idConta: dto.idConta, idUsuario: dto.idUsuario },
+        },
+        data: {
+          saldo: conta.saldo + impacto,
+        },
+      });
+
+      return lancamento;
     });
   }
 }
